@@ -36,6 +36,9 @@ class Role:
     can_curate: bool = False
     """This role has record manage permissions."""
 
+    can_comment: bool = False
+    """TODO: This role has record manage permissions."""
+
     can_view: bool = False
     """This role has view restricted record permissions."""
 
@@ -100,8 +103,8 @@ class RoleRegistry:
     def manager_roles(self, role_name):
         """Get all roles that can manage members a given role.
 
-        A manager can manage other managers, curators and readers.
-        An owner can manage other owners, managers, curators and readers.
+        A manager can manage other managers, curators, reviewers and readers.
+        An owner can manage other owners, managers, curators, reviewers and readers.
 
         This is used for instance to ensure that a manager cannot invite an
         owner and thereby escalate their privileges.

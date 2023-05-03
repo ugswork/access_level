@@ -36,6 +36,7 @@ role = TermsFacet(
     value_labels={
         "owner": _("Owner"),
         "reader": _("Reader"),
+        "reviewer": _("Reviewer"),
         "manager": _("Manager"),
         "curator": _("Curator"),
     },

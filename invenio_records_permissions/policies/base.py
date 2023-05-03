@@ -68,6 +68,16 @@ class BasePermissionPolicy(Permission):
         """
         return getattr(self.__class__, "can_" + self.action, [Disable()])
 
+    def _is_role(self, obj, checkRole):
+        try:
+            a = getattr(obj, 'role')
+            if checkRole in a:
+                return True
+            else:
+                return False
+        except:
+            return False
+        
     @property
     def needs(self):
         """Set of Needs granting permission.
@@ -86,7 +96,15 @@ class BasePermissionPolicy(Permission):
         needs = [generator.needs(**self.over) for generator in self.generators]
         self.explicit_needs |= set(chain.from_iterable(needs))
         self._load_permissions()  # self.explicit_needs is used here
-        return self._permissions.needs
+        # return self._permissions.needs
+
+        #### FIX THIS: need(reviewer) is removed
+        orig_needs = self._permissions.needs
+        new_needs = set()
+        if self.action == "action_accept" or self.action == "action_decline" \
+            or self.action == "action_cancel" or self.action == "action_expire":
+            new_needs = set(n for n in orig_needs if not self._is_role(n, 'reviewer'))
+        return new_needs
 
     @property
     def excludes(self):

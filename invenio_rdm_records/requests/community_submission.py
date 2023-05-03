@@ -138,8 +138,10 @@ class CommunitySubmission(ReviewRequest):
     allowed_creator_ref_types = ["user"]
     allowed_receiver_ref_types = ["community"]
     allowed_topic_ref_types = ["record"]
+    
+    # Added for reviewer to access Conversation
     needs_context = {
-        "community_roles": ["owner", "manager", "curator"],
+        "community_roles": ["owner", "manager", "curator", "reviewer"],
     }
 
     available_actions = {

@@ -84,10 +84,18 @@ COMMUNITIES_ROLES = [
         can_view=True,
     ),
     dict(
+        name="reviewer",
+        title=_("Reviewer"),
+        description=_("Can comment and view restricted records."),
+        can_comment=True,
+        can_view=True,
+    ),
+    dict(
         name="curator",
         title=_("Curator"),
         description=_("Can curate records and view restricted records."),
         can_curate=True,
+        can_comment=True,
         can_view=True,
     ),
     dict(
@@ -96,19 +104,21 @@ COMMUNITIES_ROLES = [
         description=_(
             "Can manage members, curate records " "and view restricted records."
         ),
-        can_manage_roles=["manager", "curator", "reader"],
+        can_manage_roles=["manager", "curator", "reviewer", "reader"],
         can_manage=True,
         can_curate=True,
+        can_comment=True,
         can_view=True,
     ),
     dict(
         name="owner",
         title=_("Owner"),
         description=_("Full administrative access to the entire community."),
-        can_manage_roles=["owner", "manager", "curator", "reader"],
+        can_manage_roles=["owner", "manager", "curator", "reviewer", "reader"],
         is_owner=True,
         can_manage=True,
         can_curate=True,
+        can_comment=True,
         can_view=True,
     ),
 ]

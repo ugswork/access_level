@@ -192,6 +192,14 @@ class CommunityCurators(CommunityRoles):
         return [r.name for r in current_roles.can("curate")]
 
 
+class CommunityReviewers(CommunityRoles):
+    """Roles representing all reviewers of a community."""
+
+    def roles(self, **kwargs):
+        """Roles."""
+        return [r.name for r in current_roles.can("comment")]
+
+
 class CommunityManagers(CommunityRoles):
     """Roles representing all managers of a community."""
 
